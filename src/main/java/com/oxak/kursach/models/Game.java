@@ -7,9 +7,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Game {
+    // Long - потому что видимо дальше будет проще работать с полем как null
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String title;
 
@@ -22,8 +23,8 @@ public class Game {
     public boolean isRusVoice() { return rusVoice; }
     public void setRusVoice(boolean rusVoice) { this.rusVoice = rusVoice; }
 
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
