@@ -28,7 +28,6 @@ public class ProductController {
         return productRepository.findById(id);
     }
 
-    // TODO разобраться а шо по скобочкам в урле
     @GetMapping("/filter")
     public List<Product> filter(@RequestParam String title) {
         System.out.println("search = " + title);

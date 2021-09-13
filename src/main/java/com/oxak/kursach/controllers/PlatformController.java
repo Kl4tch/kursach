@@ -32,7 +32,6 @@ public class PlatformController {
         return platformRepository.findById(id);
     }
 
-    // TODO разобраться а шо по скобочкам в урле
     @GetMapping("/filter")
     public List<Platform> filter(@RequestParam String title) {
         System.out.println("search = " + title);

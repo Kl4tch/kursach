@@ -1,8 +1,8 @@
 package com.oxak.kursach.views;
 
-import com.oxak.kursach.components.GameEditor;
-import com.oxak.kursach.models.Game;
-import com.oxak.kursach.repo.GameRepository;
+import com.oxak.kursach.components.PlatformEditor;
+import com.oxak.kursach.models.Platform;
+import com.oxak.kursach.repo.PlatformRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -12,19 +12,19 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route
-public class MainView extends VerticalLayout {
+public class PlatformView extends VerticalLayout {
 
-    private final GameRepository gameRepo;
+    private final PlatformRepository repo;
 
-    private Grid<Game> grid = new Grid<>(Game.class);
+    private Grid<Platform> grid = new Grid<>(Platform.class);
 
     private final TextField filter = new TextField("", "Type to filter");
     private final Button addNewBtn = new Button("Add new");
     private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewBtn);
-    private final GameEditor editor;
+    private final PlatformEditor editor;
 
-    public MainView(GameRepository gameRepository, GameEditor editor) {
-        this.gameRepo = gameRepository;
+    public PlatformView(PlatformRepository gameRepository, PlatformEditor editor) {
+        this.repo = gameRepository;
         this.editor = editor;
         add(toolbar, grid, editor);
 
@@ -34,7 +34,7 @@ public class MainView extends VerticalLayout {
         grid.asSingleSelect().addValueChangeListener(e -> {
             editor.editGame(e.getValue());
         });
-        addNewBtn.addClickListener(e -> editor.editGame(new Game()));
+        addNewBtn.addClickListener(e -> editor.editGame(new Platform()));
 
         editor.setChangeHandler(() -> {
             editor.setVisible(false);
@@ -46,8 +46,8 @@ public class MainView extends VerticalLayout {
 
     private void showData(String title) {
         if (title.isBlank())
-            grid.setItems(gameRepo.findAll());
+            grid.setItems(repo.findAll());
         else
-            grid.setItems(gameRepo.findByTitleContainingIgnoreCase(title));
+            grid.setItems(repo.findByTitleContainingIgnoreCase(title));
     }
 }
