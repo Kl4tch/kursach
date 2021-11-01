@@ -1,16 +1,18 @@
 package com.oxak.kursach.models;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Order extends DictionaryItem {
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    @JoinColumn
     private Customer customerId;
 
     private boolean finished;
     private int bonusUsed;
+    private String note;
+
+    private long createTm;
+    private long updateTm;
 }
